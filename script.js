@@ -6,7 +6,7 @@
 // //get the current hour
 // var currentHour = moment().format("HH");
 // console.log(currentHour);
-
+var timeArray = [$('#btn9').text(), $('#btn10').text(), $('#btn11').text(), $('#btn12').text(), $('#btn13').text(), $('#btn14').text(), $('#btn15').text(), $('#btn16').text(), $('#btn17').text()]
 var saveBtn = $('saveBtn'); 
 
 var currentDay = moment().format("dddd, MMMM Do YYYY"); 
@@ -15,17 +15,20 @@ $("#currentDay").text(currentDay);
 var currentHour = moment().format("HH");
 
 function colorTime () {
-    $('.time-block').each(function(index,item){
-        var currentInt = parseInt(currentHour);
-        var blockValue = parseInt($(item).data('hour'));
-        if (blockValue === currentInt){
-            $(item).addClass('present');
-        }else if (blockValue < currentInt) {
-            $(item).addClass('past');
-        }else {
-            $(item).addClass('future');
+    for (var i = 0; i < timeArray.length; i++) {
+        var hours = (moment(timeArray[i], "H a"));
+        var presentHour = moment(currentHour, "H a");
+        console.log(hours);
+        console.log(presentHour);
+        if (presentHour.isSame(hours)) {
+            $('.textarea').addClass(".present");
+        } else if (presentHour.isAfter(hours)) {
+            $('.textarea').addClass(".future");
+        } else {
+            (presentHour.isBefore(hours))
+            $('.textarea').addClass(".past");
         }
-    });
+    }
 };
 
 colorTime(); 
