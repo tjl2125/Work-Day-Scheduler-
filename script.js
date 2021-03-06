@@ -25,7 +25,7 @@ $('.savebtn').on('click', function(){
 });
 
 function colorTime() {
-    $('.time-block').each(function(index,item){ 
+    $(".textarea").each(function(index,item){ 
       var hourInt = parseInt(currentHour); 
       var blockValue = parseInt($(item).data('index'));
       if(blockValue === hourInt){
