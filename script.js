@@ -8,10 +8,26 @@ $("#currentDay").text(currentDay);
 
 var currentHour = moment().format("HH");
 
+$(document).ready(function(){
+  $('.textarea').each(function(){    
+      var id = $(this).attr('id');
+      var value = localStorage.getItem(id);
+      $(this).val(value);
+  }); 
+});
+
+$('.savebtn').on('click', function(){
+  $('.textarea').each(function(){    
+      var id = $(this).attr('id');
+      var value = $(this).val();
+      localStorage.setItem(id, value);
+  });   
+});
+
 function colorTime() {
     $('.time-block').each(function(index,item){ 
       var hourInt = parseInt(currentHour); 
-      var blockValue = parseInt($(item).data('number'));
+      var blockValue = parseInt($(item).data('index'));
       if(blockValue === hourInt){
           $(".textarea").addClass('present');
       } else if (blockValue < hourInt) {
