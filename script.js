@@ -1,11 +1,12 @@
-var currentHr = document.getElementsByClassName("time-block"); 
+//var currentHr = document.getElementsByClassName("time-block"); 
+var saveBtn = $('saveBtn'); 
 
 var currentDay = moment().format("dddd, MMMM Do YYYY"); 
 $("#currentDay").text(currentDay);
 
 var timeNow = moment().format("HH:mm:ss")
 
-function startScheduler () {
+function colorTime () {
 }
 
 var checkTime = function () {
