@@ -10,14 +10,12 @@ $(document).ready(function(){
   });
 });
 
-$(".saveBtn").on("click", handleSave)
-
 //run the save function once button clicked
-function handleSave(event){
+$(".saveBtn").on("click", function() {
   var value = $(this).siblings(".textarea").val();
   var key = $(this).siblings(".textarea").attr("id");
   localStorage.setItem(key, value);
-}
+}); 
 
 //clears the local storage and reset value
 $(".clearBtn").on("click", function(){
