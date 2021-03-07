@@ -8,4 +8,4 @@ planner, the current date is displayed. Timeblocks that represent the time from 
 https://tjl2125.github.io/Work-Day-Scheduler-/
 
 ## Screenshot 
-
+![Screenshot of deployed application](./Screenshot.png) 

@@ -1,8 +1,3 @@
-//var currentHr = document.getElementsByClassName("time-block"); 
-
-var saveBtn = $('saveBtn'); 
-
-
 var currentDay = moment().format("dddd, MMMM Do YYYY"); 
 $("#currentDay").text(currentDay);
 
@@ -35,38 +30,20 @@ $('.clearBtn').on('click', function(){
   });   
 });
 
+//changes color of timeblocks depending on time 
 function colorTime() {
-  var timeBlockElements = $(".textarea");
 
-  //loop through textbox classes
-  for (var i = 0 ; i < timeBlockElements.length ; i++) {
-
-      //Get element i's ID as a string
-      var elementID = timeBlockElements[i].id;
-
-      //get element by ID
-      var manipID = document.getElementById(timeBlockElements[i].id)
-
-      // apply new class if task is present/past/future
-      if (elementID < currentHour) {
-          $(manipID).addClass("past");
-      } else if (elementID > currentHour) {
-          $(manipID).addClass("future");
+    $(".textarea").each(function(index,item){ 
+      var hourInt = parseInt(currentHour); 
+      var blockTime = parseInt($(item).data('index'));
+      if(blockTime === hourInt){
+          $("textarea").addClass('present');
+      } else if (blockTime < hourInt) {
+        $("textarea").addClass('past');
       } else {
-          $(manipID).addClass("present");
+        $("textarea").addClass('future');
       }
-  }
-    // $(".textarea").each(function(index,item){ 
-    //   var hourInt = parseInt(currentHour); 
-    //   var blockValue = parseInt($(item).data('index'));
-    //   if(blockValue === hourInt){
-    //       $("textarea").addClass('present');
-    //   } else if (blockValue < hourInt) {
-    //     $("textarea").addClass('past');
-    //   } else {
-    //     $("textarea").addClass('future');
-    //   }
-    // });
+    });
 };
 
 colorTime(); 
