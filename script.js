@@ -8,6 +8,7 @@ $("#currentDay").text(currentDay);
 
 var currentHour = moment().format("HH");
 
+//retrieving the text for tasks in time-blocks from localStorage
 $(document).ready(function(){
   $('.textarea').each(function(){    
       var id = $(this).attr('id');
@@ -16,6 +17,7 @@ $(document).ready(function(){
   }); 
 });
 
+//saving text for tasks to localStorage
 $('.savebtn').on('click', function(){
   $('.textarea').each(function(){    
       var id = $(this).attr('id');
@@ -24,22 +26,52 @@ $('.savebtn').on('click', function(){
   });   
 });
 
+$('.clearBtn').on('click', function(){
+  $('.textarea').each(function(){
+      $('.textarea').val('');    
+      var id = $(this).attr('id');
+      var value = $(this).val();
+      localStorage.setItem(id, value);
+  });   
+});
+
 function colorTime() {
-    $(".textarea").each(function(index,item){ 
-      var hourInt = parseInt(currentHour); 
-      var blockValue = parseInt($(item).data('index'));
-      if(blockValue === hourInt){
-          $(".textarea").addClass('present');
-      } else if (blockValue < hourInt) {
-        $(".textarea").addClass('past');
+  var timeBlockElements = $(".textarea");
+
+  //loop through textbox classes
+  for (var i = 0 ; i < timeBlockElements.length ; i++) {
+
+      //Get element i's ID as a string
+      var elementID = timeBlockElements[i].id;
+
+      //get element by ID
+      var manipID = document.getElementById(timeBlockElements[i].id)
+
+      // apply new class if task is present/past/future
+      if (elementID < currentHour) {
+          $(manipID).addClass("past");
+      } else if (elementID > currentHour) {
+          $(manipID).addClass("future");
       } else {
-        $(".textarea").addClass('future');
+          $(manipID).addClass("present");
       }
-    });
+  }
+    // $(".textarea").each(function(index,item){ 
+    //   var hourInt = parseInt(currentHour); 
+    //   var blockValue = parseInt($(item).data('index'));
+    //   if(blockValue === hourInt){
+    //       $("textarea").addClass('present');
+    //   } else if (blockValue < hourInt) {
+    //     $("textarea").addClass('past');
+    //   } else {
+    //     $("textarea").addClass('future');
+    //   }
+    // });
 };
 
 colorTime(); 
 
+//updates page every 15s
 var runAgain = window.setInterval(function() {
     colorTime();
 }, 15000); 
